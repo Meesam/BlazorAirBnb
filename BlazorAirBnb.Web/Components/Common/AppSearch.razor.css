@@ -1,0 +1,19 @@
+﻿.search-container {
+    display: flex;
+    align-items: center;
+    height: 100%;
+    justify-content: center;
+}
+
+.search-box {
+    min-width: 1000px;
+    border-radius: 50px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    padding-left: 20px;
+    padding-right: 20px;
+    border: 0.01rem solid #CCC;
+    border-bottom: none;
+    color: #717171;
+}

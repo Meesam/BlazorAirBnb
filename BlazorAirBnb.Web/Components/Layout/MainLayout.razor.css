@@ -4,16 +4,14 @@
     overflow-x:hidden;
     display:grid;
     grid-template-columns:repeat(6,1fr);
-    grid-template-rows:50px 50px 50px 1fr 50px;
+    grid-template-rows:50px 80px 80px 1fr 50px;
     margin-left:60px;
     margin-right:60px;
-}
-
-.container div {
-    border:1px solid #000;
 }
 
 .header, .search, .locations, .main-content, .footer {
     grid-column: 1 / 7;
 }
+
+
 

@@ -1,0 +1,23 @@
+﻿.location-container {
+    display: grid;
+    grid-template-rows: 1fr;
+    grid-template-columns: repeat(12,1fr);
+    height: 100%;
+    gap: 5px;
+}
+
+    .location-container div {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        height: 100%;
+        color: #717171;
+        font-size: 0.875rem;
+        justify-content: center;
+    }
+
+.location-container div img {
+  height: 30px;
+  width: 30px;
+  opacity:0.5;
+}
