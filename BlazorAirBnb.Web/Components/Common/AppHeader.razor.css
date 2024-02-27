@@ -1,0 +1,50 @@
+﻿.header-container{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  height:100%;
+}
+
+.middle-menu ul, right-menu ul{
+    list-style: none;
+}
+
+.middle-menu ul li, .right-menu ul li {
+   display: inline-block;
+ }
+
+ .middle-menu ul li a, .right-menu ul li a {
+   text-decoration: none;
+   color: #717171;
+   font-size: 1rem;
+   padding: 10px 20px;
+ }
+
+.middle-menu ul li a:hover {
+   color: #222222;
+   background-color:#DDDDDD;
+   border-radius:50px;
+}
+
+.middle-menu ul li a:active {
+  color: #222222;
+}
+
+.airbnb-text {
+    font-size: 0.875rem !important;
+    font-weight: 500;
+    color: #222222 !important;
+    padding: 10px 20px;
+}
+
+.airbnb-text:hover {
+  background-color: #DDDDDD;
+  border-radius: 50px;
+}
+
+.right-menu ul li a i:hover {
+    background-color: #DDDDDD;
+    border-radius: 100%;
+}
+
+
