@@ -15,4 +15,9 @@
     <Folder Include="wwwroot\images\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\BlazorAirBnb.DataAccess\BlazorAirBnb.DataAccess.csproj" />
+    <ProjectReference Include="..\BlazorAirBnb.Models\BlazorAirBnb.Models.csproj" />
+  </ItemGroup>
+
 </Project>

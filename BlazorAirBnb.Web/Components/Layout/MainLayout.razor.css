@@ -1,7 +1,5 @@
 .container {
-    background-color: #F7F7F7;
-    height:100vh;
-    overflow-x:hidden;
+    background-color: #FFFFFF;
     display:grid;
     grid-template-columns:repeat(6,1fr);
     grid-template-rows:50px 80px 80px 1fr 50px;
@@ -11,6 +9,12 @@
 
 .header, .search, .locations, .main-content, .footer {
     grid-column: 1 / 7;
+}
+
+.locations{
+    position:sticky;
+    top:0;
+    background-color:#FFFFFF;
 }
 
 
