@@ -16,7 +16,7 @@
         justify-content: center;
     }
 
-.location-container div img {
+.imgStyle {
   height: 30px;
   width: 30px;
   opacity:0.5;
