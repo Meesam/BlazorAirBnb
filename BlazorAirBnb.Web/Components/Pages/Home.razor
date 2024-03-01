@@ -1,20 +1,32 @@
 ﻿@page "/"
+@inject NotificationService NotificationService
 
 <PageTitle>Home</PageTitle>
 
 <div class="home-container">
     @for(var i =1; i < 20; i++)
     {
-        <div class="item-product">
-            <div class="item-image">
-                <img src="images/img-1.jpg" alt="2" />
-            </div>
-            <div class="item-desc">
-                asdasdasdasdasdasdasdasdasdas
-            </div>
-            <div class="item-price">
-                4,142 night
-            </div>
-        </div>
+        <RadzenCard Variant="@variant" Class="rz-my-2 rz-mx-auto" Style="max-width: 300px">
+            <RadzenStack Orientation="Orientation.Vertical" JustifyContent="JustifyContent.Start" Gap="1rem" Class="rz-p-0">
+                <RadzenImage Path="images/img-3.jpg" Style="width: 100%; height: 200px; border-radius: 15px;" />
+                <RadzenStack Gap="0">
+                    <RadzenText TextStyle="TextStyle.Body1" class="rz-display-flex rz-mt-0 rz-my-0"><b>ProElite</b></RadzenText>
+                    <RadzenText TextStyle="TextStyle.Overline"><b>ProElite Smart Flip Case Cover for Apple iPad Air 5th/4th 10.9 inch, Translucent Back, Purple</b></RadzenText>
+                    <RadzenRating @bind-Value=@value ReadOnly=true />
+                    <RadzenText TextStyle="TextStyle.Body1" class="rz-display-flex rz-mt-2 rz-mb-0"><b>₹589.00</b></RadzenText>
+                    <RadzenButton Variant="Variant.Flat" Click=@(args => OnClick("Primary button")) Text="Add to cart" ButtonStyle="ButtonStyle.Secondary" />
+                </RadzenStack>
+            </RadzenStack>
+        </RadzenCard>
     }
 </div>
+
+@code {
+    Variant variant = Variant.Filled;
+    int value = 2;
+
+    private void OnClick(string text)
+    {
+        NotificationService.Notify(new NotificationMessage { Severity = NotificationSeverity.Info, Summary = "Button Clicked", Detail = text });
+    }
+}
