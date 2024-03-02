@@ -1,0 +1,16 @@
+﻿.public-container {
+    background-color: #FFFFFF;
+    display: grid;
+    grid-template-columns: repeat(6,1fr);
+    grid-template-rows: 50px 1fr 50px;
+    margin-left: 60px;
+    margin-right: 60px;
+}
+
+.header, .main-content, .footer {
+    grid-column: 1 / 7;
+}
+
+.main-content{
+    height:100vh;
+}

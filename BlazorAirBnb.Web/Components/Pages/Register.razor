@@ -1,0 +1,51 @@
+﻿@page "/register"
+@inject IAuthenticationService authenticationService
+@inject NavigationManager navigationManager
+@rendermode InteractiveServer
+
+<RadzenCard class="rz-my-12 rz-mx-auto rz-p-4 rz-p-md-12" style="max-width: 400px;">
+    <EditForm Model=@RegisterVM OnValidSubmit="RegisterUser">
+        <DataAnnotationsValidator />
+        <RadzenStack Orientation="Orientation.Vertical">
+            <RadzenFormField Text="Name" Style="width: 100%;">
+                <InputText @bind-Value=@RegisterVM!.Name class="rz-textbox valid rz-state-empty" />
+            </RadzenFormField>
+            <ValidationMessage class="validation-msg" For="@(() => RegisterVM!.Name)" />
+            <RadzenFormField Text="Email" Style="width: 100%;">
+                <InputText @bind-Value=@RegisterVM!.Email class="rz-textbox valid rz-state-empty" />
+            </RadzenFormField>
+            <ValidationMessage class="validation-msg" For="@(() => RegisterVM!.Email)" />
+            <RadzenFormField Text="Dob" Style="width: 100%;">
+                <InputDate TValue="DateTime" @bind-Value="@RegisterVM!.DateOfBirth" class="rz-textbox valid rz-state-empty" />
+            </RadzenFormField>
+            <ValidationMessage class="validation-msg" For="@(() => RegisterVM!.DateOfBirth)" />
+            <RadzenFormField Text="Password" Variant="Variant.Outlined">
+                <InputText type="password" @bind-Value=@RegisterVM!.Password class="rz-textbox valid rz-state-empty" />
+            </RadzenFormField>
+            <ValidationMessage class="validation-msg" For="@(() => RegisterVM!.Password)" />
+            <RadzenFormField Text="ConfirmPassword" Variant="Variant.Outlined">
+                <InputText type="password" @bind-Value=@RegisterVM!.ConfirmPassword class="rz-textbox valid rz-state-empty" />
+            </RadzenFormField>
+            <ValidationMessage class="validation-msg" For="@(() => RegisterVM!.ConfirmPassword)" />
+            <RadzenButton Text="Register" ButtonType="ButtonType.Submit"></RadzenButton>
+        </RadzenStack>
+    </EditForm>
+</RadzenCard>
+
+@code {
+    public RegisterVM? RegisterVM;
+
+    protected override void OnInitialized()
+    {
+        RegisterVM = new RegisterVM();
+    }
+
+    private async void RegisterUser()
+    {
+        var response = await authenticationService.RegisterUser(RegisterVM!);
+        if (response is true)
+        {
+            navigationManager.NavigateTo("/login");
+        }
+    }
+}

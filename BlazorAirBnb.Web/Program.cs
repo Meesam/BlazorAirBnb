@@ -1,4 +1,6 @@
 using BlazorAirBnb.DataAccess;
+using BlazorAirBnb.DataAccess.Services.Implementations;
+using BlazorAirBnb.DataAccess.Services.Interfaces;
 using BlazorAirBnb.Models;
 using BlazorAirBnb.Web.Components;
 using Microsoft.AspNetCore.Identity;
@@ -16,6 +18,9 @@ builder.Services.AddDbContext<AirBnbDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 builder.Services.AddIdentity<AppUser, IdentityRole>().AddEntityFrameworkStores<AirBnbDbContext>().AddDefaultTokenProviders();
+
+builder.Services.AddScoped<IAuthenticationService, AuthenticationService>();
+builder.Services.AddScoped<ICategoryService, CategoryService>();
 
 var app = builder.Build();
 

@@ -1,34 +1,50 @@
-﻿@page "/login"
+﻿@page "/"
+@page "/login"
+@inject IAuthenticationService authenticationService
+@inject NavigationManager navigationManager
+@rendermode InteractiveServer
 
-<RadzenCard class="rz-my-12 rz-mx-auto rz-p-4 rz-p-md-12" style="max-width: 600px;">
-    <RadzenTemplateForm Data=@("LoginWithDefaultValues")>
-        <RadzenLogin AllowRegister="true" AllowResetPassword="true" Username=@userName Password=@password
-                    AllowRememberMe="true" RememberMe="@rememberMe"
-                    Login=@(args => OnLogin(args, "Login with default values"))
-                    ResetPassword=@(args => OnResetPassword(args, "Login with default values"))
-                    Register=@(args => OnRegister("Login with default values")) />
-    </RadzenTemplateForm>
+<RadzenCard class="rz-my-12 rz-mx-auto rz-p-4 rz-p-md-12" style="max-width: 400px;">
+    <EditForm Model=@LoginVM OnValidSubmit="OnLogin">
+        <DataAnnotationsValidator />
+        <RadzenStack Orientation="Orientation.Vertical">
+            <RadzenFormField Text="Username" Style="width: 100%;">
+                <InputText @bind-Value=@LoginVM!.Username class="rz-textbox valid rz-state-empty" />
+            </RadzenFormField>
+            <ValidationMessage class="validation-msg" For="@(() => LoginVM!.Username)" />
+
+            <RadzenFormField Text="Password" Variant="Variant.Outlined">
+                <InputText type="password" @bind-Value=@LoginVM!.Password class="rz-textbox valid rz-state-empty" />
+            </RadzenFormField>
+            <ValidationMessage class="validation-msg" For="@(() => LoginVM!.Password)" />
+
+            <div class="rz-p-0">
+                <RadzenCheckBox @bind-Value=@LoginVM!.RememberMe Name="RememberMe" />
+                <RadzenLabel Text="Remember me" Component="CheckBox1" Style="margin-left: 8px; vertical-align: middle; font-size:12px;" />
+            </div>
+            <RadzenButton Text="Login" ButtonType="ButtonType.Submit"></RadzenButton>
+            <RadzenLink Path="register" Text="New User?" />
+        </RadzenStack>
+    </EditForm>
 </RadzenCard>
 
 @code {
-    string userName = "admin";
-    string password = "admin";
-    bool rememberMe = true;
+    public LoginVM? LoginVM;
 
-
-
-    void OnLogin(LoginArgs args, string name)
+    protected override void OnInitialized()
     {
-        //console.Log($"{name} -> Username: {args.Username}, password: {args.Password}, remember me: {args.RememberMe}");
+        LoginVM = new LoginVM();
     }
 
-    void OnRegister(string name)
-    {
-       // console.Log($"{name} -> Register");
-    }
 
-    void OnResetPassword(string value, string name)
+
+    private async void OnLogin()
     {
-        //console.Log($"{name} -> ResetPassword for user: {value}");
+        var loginResponse = await authenticationService.Login(LoginVM!);
+        if (loginResponse is not null)
+        {
+            navigationManager.NavigateTo("/home");
+        }
+
     }
 }
