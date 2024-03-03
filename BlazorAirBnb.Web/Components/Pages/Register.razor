@@ -2,6 +2,7 @@
 @inject IAuthenticationService authenticationService
 @inject NavigationManager navigationManager
 @rendermode InteractiveServer
+@layout PublicLayout
 
 <RadzenCard class="rz-my-12 rz-mx-auto rz-p-4 rz-p-md-12" style="max-width: 400px;">
     <EditForm Model=@RegisterVM OnValidSubmit="RegisterUser">
@@ -45,7 +46,7 @@
         var response = await authenticationService.RegisterUser(RegisterVM!);
         if (response is true)
         {
-            navigationManager.NavigateTo("/login");
+            navigationManager.NavigateTo("/login",true);
         }
     }
 }

@@ -1,8 +1,11 @@
 ﻿@page "/"
 @page "/login"
+@* @inject Blazored.LocalStorage.ILocalStorageService localStorage *@
 @inject IAuthenticationService authenticationService
 @inject NavigationManager navigationManager
+@inject AuthenticationStateProvider authStateProvider
 @rendermode InteractiveServer
+@layout PublicLayout
 
 <RadzenCard class="rz-my-12 rz-mx-auto rz-p-4 rz-p-md-12" style="max-width: 400px;">
     <EditForm Model=@LoginVM OnValidSubmit="OnLogin">
@@ -36,14 +39,28 @@
         LoginVM = new LoginVM();
     }
 
-
-
     private async void OnLogin()
     {
         var loginResponse = await authenticationService.Login(LoginVM!);
         if (loginResponse is not null)
         {
-            navigationManager.NavigateTo("/home");
+            //await localStorage.SetItemAsync("userAUTH", loginResponse);
+            var customAuthStateProvider = (CustomAuthenticationStateProvider)authStateProvider;
+            await customAuthStateProvider.UpdateAuthenticationState(new UserSession
+            {
+                    UserName = loginResponse.UserName,
+                    Role = loginResponse.Role
+            });
+            switch (loginResponse.Role)
+            {
+                case "Admin":
+                    navigationManager.NavigateTo("/category",true);
+                    break;
+
+                case "Customer":
+                    navigationManager.NavigateTo("/home",true);
+                    break;
+            }
         }
 
     }

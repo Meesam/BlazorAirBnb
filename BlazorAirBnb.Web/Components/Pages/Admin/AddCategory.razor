@@ -1,0 +1,39 @@
+﻿@page "/category"
+@layout AdminLayout
+@inject Blazored.LocalStorage.ILocalStorageService localStorage
+@attribute [Authorize]
+@rendermode InteractiveServer
+
+
+<h3>AddCategory</h3>
+ <AuthorizeView>
+    <Authorized>
+        <h3>Hello Meesam</h3>
+    </Authorized>
+    <NotAuthorized>
+        <h3>Hello Guest</h3>
+    </NotAuthorized>
+</AuthorizeView>
+
+@code {
+
+    [CascadingParameter]
+    private Task<AuthenticationState>? authenticationState { get; set; }
+    public string UserName { get; set; } = string.Empty;
+
+
+    protected override async Task OnInitializedAsync()
+    {
+        var authState = await authenticationState!;
+        if (authState is not null)
+        {
+            UserName = authState.User.Identity.Name;
+        }
+        else
+        {
+            UserName = string.Empty;
+        }
+        
+    }
+
+}
