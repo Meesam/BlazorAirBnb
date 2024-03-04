@@ -9,12 +9,12 @@ namespace BlazorAirBnb.DataAccess.Services.Interfaces
 {
     public interface ICategoryService
     {
-        Task<IQueryable<Category>> GetAllCategories();
+        Task<List<Category>> GetAllCategories();
         Task<bool> AddCategory(Category category);
 
-        Task DeleteCategory(int id);
+        Task<bool> DeleteCategory(int id);
 
-        Task<Category> GetCategoryById(int id);
+        Task<Category?> GetCategoryById(int id);
 
         Task<bool> UpdateCategory(Category category);
     }
