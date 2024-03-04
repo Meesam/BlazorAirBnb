@@ -6,6 +6,7 @@
 @inject AuthenticationStateProvider authStateProvider
 @rendermode InteractiveServer
 @layout PublicLayout
+@inject IJSRuntime JsInterop
 
 <RadzenCard class="rz-my-12 rz-mx-auto rz-p-4 rz-p-md-12" style="max-width: 400px;">
     <EditForm Model=@LoginVM OnValidSubmit="OnLogin">

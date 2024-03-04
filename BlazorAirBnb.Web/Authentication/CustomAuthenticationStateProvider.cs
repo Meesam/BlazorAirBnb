@@ -29,13 +29,14 @@ namespace BlazorAirBnb.Web.Authentication
                 {
                    new Claim(ClaimTypes.Name, userSession.UserName),
                    new Claim(ClaimTypes.Role, userSession.Role),
+
                 }, "CustomAuth"
                      ));
                 return await Task.FromResult(new AuthenticationState(claimPrinciple));
             }
-            catch
+            catch(Exception ex)
             {
-                return null;
+                throw ex;
             }
         }
 
